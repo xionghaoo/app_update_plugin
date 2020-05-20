@@ -31,6 +31,8 @@ class DownloadService : Service() {
 
         var isDownloadCompleted = true
 
+        var isRunning = false
+
         fun startService(
             context: Context,
             connection: ServiceConnection,
@@ -88,11 +90,13 @@ class DownloadService : Service() {
             mNotifyManager?.createNotificationChannel(channel)
         }
 
+        isRunning = true
         return binder
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
 //        Log.d("updatetest", "停止服务")
+        isRunning = false
         return super.onUnbind(intent)
     }
 

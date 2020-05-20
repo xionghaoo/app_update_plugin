@@ -35,8 +35,8 @@ class UpdateDelegate(
         }
     }
 
-    private var tvDownload: TextView? = null
-    private var progressBar: ProgressBar? = null
+//    private var tvDownload: TextView? = null
+//    private var progressBar: ProgressBar? = null
     private var btnConfirm: TextView? = null
     private var urlReinstall: String? = null
 
@@ -45,7 +45,7 @@ class UpdateDelegate(
     }
 
     fun stopService() {
-        if (mBound) {
+        if (DownloadService.isRunning) {
             DownloadService.stopService(context, connection)
         }
     }
@@ -57,21 +57,21 @@ class UpdateDelegate(
     override fun onProgress(progress: Int) {
         context.runOnUiThread {
             progressCallback(progress)
-            tvDownload?.text = "下载进度${progress}%"
-            progressBar?.progress = progress
+//            tvDownload?.text = "下载进度${progress}%"
+//            progressBar?.progress = progress
         }
     }
 
     override fun onComplete() {
         context.runOnUiThread {
             progressCallback(100)
-            tvDownload?.text = "下载完成"
-            btnConfirm?.text = "点击安装"
-            btnConfirm?.setOnClickListener {
-                if (mService.reInstallApk != null) {
-                    mService.installApk(mService.reInstallApk!!)
-                }
-            }
+//            tvDownload?.text = "下载完成"
+//            btnConfirm?.text = "点击安装"
+//            btnConfirm?.setOnClickListener {
+//                if (mService.reInstallApk != null) {
+//                    mService.installApk(mService.reInstallApk!!)
+//                }
+//            }
         }
         DownloadService.stopService(context, connection)
     }
@@ -79,12 +79,12 @@ class UpdateDelegate(
     override fun onError(error: String) {
         context.runOnUiThread {
             progressCallback(-1)
-            tvDownload?.text = "下载失败，请重新下载"
-            btnConfirm?.text = "重新下载"
-            btnConfirm?.setOnClickListener {
-//                downloadDialog?.dismiss()
-                DownloadService.startService(context, connection, urlReinstall, mService.isForceUpdate)
-            }
+//            tvDownload?.text = "下载失败，请重新下载"
+//            btnConfirm?.text = "重新下载"
+//            btnConfirm?.setOnClickListener {
+////                downloadDialog?.dismiss()
+//                DownloadService.startService(context, connection, urlReinstall, mService.isForceUpdate)
+//            }
         }
         DownloadService.stopService(context, connection)
     }
