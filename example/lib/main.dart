@@ -1,6 +1,5 @@
 import 'package:appupdateplugin/update_service.dart';
 import 'package:flutter/material.dart';
-import 'package:core/screen_adaptation.dart' as adapt;
 
 void main() {
   runApp(MyApp());
@@ -44,8 +43,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: (context, widget) {
-        adapt.scale = MediaQuery.of(context).devicePixelRatio;
-        adapt.screenWidth = MediaQuery.of(context).size.width;
         return widget;
       },
       home: HomePage(),

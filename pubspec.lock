@@ -50,13 +50,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
-  core:
-    dependency: "direct main"
-    description:
-      path: "../core"
-      relative: true
-    source: path
-    version: "0.0.1"
   crypto:
     dependency: transitive
     description:

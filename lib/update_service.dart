@@ -47,13 +47,13 @@ class UpdateService {
   _downloadProgressWidget() {
     return Center(
       child: SizedBox(
-        width: xdp(60),
-        height: xdp(60),
+        width: 60,
+        height: 60,
         child: Stack(
           children: <Widget>[
             SizedBox(
-              width: xdp(60),
-              height: xdp(60),
+              width: 60,
+              height: 60,
               child: CircularProgressIndicator(
                 value: _downloadProgress / 100.0,
               ),
@@ -85,27 +85,27 @@ class UpdateService {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(xdp(4))
+                    borderRadius: BorderRadius.circular(4)
                 ),
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(xdp(4))
+                      borderRadius: BorderRadius.circular(4)
                   ),
-                  padding: EdgeInsets.fromLTRB(xdp(15), xdp(10), xdp(15), xdp(10)),
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      SizedBox(height: xdp(10),),
-                      Text("有新的版本$appVersion", style: TextStyle(fontSize: xdp(18), fontWeight: FontWeight.bold),),
-                      SizedBox(height: xdp(10),),
+                      SizedBox(height: 10),
+                      Text("有新的版本$appVersion", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                      SizedBox(height: 10),
                       Text(appContent),
-                      SizedBox(height: xdp(10),),
+                      SizedBox(height: 10),
                       _downloadProgress != null
                           ? _downloadProgressWidget()
                           : SizedBox(),
-                      SizedBox(height: xdp(10),),
+                      SizedBox(height: 10),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
@@ -115,7 +115,7 @@ class UpdateService {
                                 Navigator.pop(context);
                               },
                             ),
-                            SizedBox(width: xdp(10),),
+                            SizedBox(width: 10),
                             FlatButton(
                               child: Text("确定", style: TextStyle(color: Theme.of(context).primaryColor),),
                               onPressed: () {
