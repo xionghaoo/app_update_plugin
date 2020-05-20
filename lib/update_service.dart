@@ -78,61 +78,64 @@ class UpdateService {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return StatefulBuilder(
-            builder: (context, setState) {
-              return Dialog(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4)
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
+          return WillPopScope(
+            onWillPop: () async => isForce,
+            child: StatefulBuilder(
+              builder: (context, setState) {
+                return Dialog(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)
                   ),
-                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizedBox(height: 10),
-                      Text("有新的版本$appVersion", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
-                      SizedBox(height: 10),
-                      Text(appContent),
-                      SizedBox(height: 10),
-                      _downloadProgress != null
-                          ? _downloadProgressWidget()
-                          : SizedBox(),
-                      SizedBox(height: 10),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            FlatButton(
-                              child: Text("取消", style: TextStyle(color: Color(0xFF666666))),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                            SizedBox(width: 10),
-                            FlatButton(
-                              child: Text("确定", style: TextStyle(color: Theme.of(context).primaryColor),),
-                              onPressed: () {
-                                updateStream.listen((progress) {
-                                  setState(() {
-                                    _downloadProgress = progress.toDouble();
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4)
+                    ),
+                    padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        SizedBox(height: 10),
+                        Text("有新的版本$appVersion", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+                        SizedBox(height: 10),
+                        Text(appContent),
+                        SizedBox(height: 10),
+                        _downloadProgress != null
+                            ? _downloadProgressWidget()
+                            : SizedBox(),
+                        SizedBox(height: 10),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              FlatButton(
+                                child: Text("取消", style: TextStyle(color: Color(0xFF666666))),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              SizedBox(width: 10),
+                              FlatButton(
+                                child: Text("确定", style: TextStyle(color: Theme.of(context).primaryColor),),
+                                onPressed: () {
+                                  updateStream.listen((progress) {
+                                    setState(() {
+                                      _downloadProgress = progress.toDouble();
+                                    });
                                   });
-                                });
-                                downloadApk(updateUrl, appVersion, appContent, isForce);
-                              },
-                            )
-                          ]
-                      )
-                    ],
+                                  downloadApk(updateUrl, appVersion, appContent, isForce);
+                                },
+                              )
+                            ]
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         },
       );

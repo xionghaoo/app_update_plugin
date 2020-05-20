@@ -1,14 +1,10 @@
-# appupdateplugin
+# App更新插件
 
-A new Flutter plugin.
+## Android使用请注意
+首先在android/build.gradle文件中填写主项目包名
+```groovy
+// TODO 依赖的主项目包名，在集成前请修改
+def dependencyPackageName = "com.pgy.appupdateplugin"
+```
 
-## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
