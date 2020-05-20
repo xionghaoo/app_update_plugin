@@ -1,8 +1,17 @@
 group 'com.pgy.appupdateplugin'
 version '1.0-SNAPSHOT'
 
-// TODO 依赖的主项目包名，在集成前请修改
-def dependencyPackageName = "com.pgy.appupdateplugin"
+//def dependencyPackageName = localProperties.getProperty('dependencyPackageName')
+//if (dependencyPackageName == null) {
+//    dependencyPackageName = 'com.pgy.appupdateplugin'
+//}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+def dependencyPackageName = properties.getProperty("dependencyPackageName", "com.pgy.appupdateplugin")
+
+print "dependencyPackageName: $dependencyPackageName"
 
 buildscript {
     ext.kotlin_version = '1.3.72'
