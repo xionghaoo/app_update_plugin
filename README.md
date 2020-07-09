@@ -1,6 +1,8 @@
 # App更新插件
 
-安装方式
+## 安装方式
+> 通过git仓库添加
+
 ```
 dependencies:
   flutter:
