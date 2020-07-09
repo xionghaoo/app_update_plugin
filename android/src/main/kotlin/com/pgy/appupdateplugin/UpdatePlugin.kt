@@ -41,6 +41,9 @@ class UpdatePlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
                 updateDelegate?.startDownloadService(url, isForce)
             }
         }
+        if (call.method == "installApk") {
+            updateDelegate?.installApk()
+        }
     }
 
     override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {

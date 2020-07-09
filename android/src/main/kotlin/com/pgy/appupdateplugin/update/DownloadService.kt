@@ -187,7 +187,7 @@ class DownloadService : Service() {
         isDownloadCompleted = true
     }
 
-    private fun installApk(apk: File) {
+    fun installApk(apk: File) {
         reInstallApk = apk
 
         val intent = Intent(Intent.ACTION_VIEW)

@@ -44,6 +44,12 @@ class UpdateDelegate(
         DownloadService.startService(context, connection, url, isForce)
     }
 
+    fun installApk() {
+        if (mService.reInstallApk != null) {
+            mService.installApk(mService.reInstallApk!!)
+        }
+    }
+
     fun stopService() {
         if (DownloadService.isRunning) {
             DownloadService.stopService(context, connection)

@@ -30,13 +30,26 @@ class UpdateService {
     return _updateStream;
   }
 
+  double get downloadProgress => _downloadProgress;
   double _downloadProgress;
+
+  addProgressListener(StateSetter setStateOuter) {
+    updateStream.listen((progress) {
+      setStateOuter(() {
+        _downloadProgress = progress.toDouble();
+      });
+    });
+  }
 
   downloadApk(String url, String versionName, String content, bool isForce) {
     _methodChannel.invokeMethod("downloadApk", {
       "url": url,
       "isForce": isForce
     });
+  }
+
+  installApk() {
+    _methodChannel.invokeMethod("installApk");
   }
 
   navigateToAppStore() {
