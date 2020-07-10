@@ -34,11 +34,12 @@ class UpdatePlugin : FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAwa
         if (call.method == "downloadApk") {
             val url = call.argument<String>("url")
             val isForce = call.argument<Boolean>("isForce")
+            val appName = call.argument<String>("appName")
             if (url != null) {
 //                updateDelegate?.downloadApk(url, versionName, content, isForce) {
 //                    // on cancel
 //                }
-                updateDelegate?.startDownloadService(url, isForce)
+                updateDelegate?.startDownloadService(url, isForce, appName)
             }
         }
         if (call.method == "installApk") {

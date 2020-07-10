@@ -40,11 +40,11 @@ class UpdateDelegate(
     private var btnConfirm: TextView? = null
     private var urlReinstall: String? = null
 
-    fun startDownloadService(url: String, isForce: Boolean?) {
+    fun startDownloadService(url: String, isForce: Boolean?, appName: String?) {
         if (DownloadService.isRunning) {
             DownloadService.stopService(context, connection)
         }
-        DownloadService.startService(context, connection, url, isForce)
+        DownloadService.startService(context, connection, url, isForce, appName)
     }
 
     fun installApk() {

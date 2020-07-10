@@ -27,6 +27,7 @@ class DownloadService : Service() {
         private const val NOTIFICATION_ID = 2
         private const val EXTRA_UPDATE_URL = "com.pgy.ourea.update.EXTRA_UPDATE_URL"
         private const val EXTRA_IS_FORCE = "com.pgy.ourea.update.EXTRA_IS_FORCE"
+        private const val EXTRA_APP_NAME = "com.pgy.ourea.update.EXTRA_APP_NAME"
         private const val CHANNEL_ID = "download_channel"
         private const val BUFFER_SIZE = 10 * 1024 // 8k ~ 32K
 
@@ -38,12 +39,14 @@ class DownloadService : Service() {
             context: Context,
             connection: ServiceConnection,
             url: String?,
-            isForce: Boolean?
+            isForce: Boolean?,
+            appName: String?
         ) {
             if (url == null) return
             Intent(context, DownloadService::class.java).also { intent ->
                 intent.putExtra(EXTRA_UPDATE_URL, url)
                 intent.putExtra(EXTRA_IS_FORCE, isForce)
+                intent.putExtra(EXTRA_APP_NAME, appName)
                 context.bindService(intent, connection, Context.BIND_AUTO_CREATE)
             }
         }
@@ -63,14 +66,16 @@ class DownloadService : Service() {
     private var downloadUrl: String? = null
     var reInstallApk: File? = null
     var isForceUpdate: Boolean? = false
+    private var appName: String? = null
 
     override fun onBind(intent: Intent?): IBinder? {
         downloadUrl = intent?.getStringExtra(EXTRA_UPDATE_URL)
+        appName = intent?.getStringExtra(EXTRA_APP_NAME)
         isForceUpdate = intent?.getBooleanExtra(EXTRA_IS_FORCE, false)
         mNotifyManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         mBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
 
-        val appName = "山雀速运"
+        val appName = appName ?: "App"
         val icon = R.mipmap.ic_launcher
 
         mBuilder.setContentTitle(appName)

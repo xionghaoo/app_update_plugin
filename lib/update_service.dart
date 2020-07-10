@@ -41,10 +41,11 @@ class UpdateService {
     });
   }
 
-  downloadApk(String url, String versionName, String content, bool isForce) {
+  downloadApk(String url, String versionName, String content, bool isForce, String appName) {
     _methodChannel.invokeMethod("downloadApk", {
       "url": url,
-      "isForce": isForce
+      "isForce": isForce,
+      "appName": appName
     });
   }
 
@@ -138,7 +139,7 @@ class UpdateService {
                                       _downloadProgress = progress.toDouble();
                                     });
                                   });
-                                  downloadApk(updateUrl, appVersion, appContent, isForce);
+                                  downloadApk(updateUrl, appVersion, appContent, isForce, "测试App");
                                 },
                               )
                             ]
