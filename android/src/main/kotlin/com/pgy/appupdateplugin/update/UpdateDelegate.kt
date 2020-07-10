@@ -41,6 +41,9 @@ class UpdateDelegate(
     private var urlReinstall: String? = null
 
     fun startDownloadService(url: String, isForce: Boolean?) {
+        if (DownloadService.isRunning) {
+            DownloadService.stopService(context, connection)
+        }
         DownloadService.startService(context, connection, url, isForce)
     }
 

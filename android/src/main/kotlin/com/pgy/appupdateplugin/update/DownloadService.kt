@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.IBinder
 import android.provider.ContactsContract.Directory.PACKAGE_NAME
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
 import com.pgy.appupdateplugin.R
@@ -40,7 +41,6 @@ class DownloadService : Service() {
             isForce: Boolean?
         ) {
             if (url == null) return
-//            Log.d(TAG, "startService")
             Intent(context, DownloadService::class.java).also { intent ->
                 intent.putExtra(EXTRA_UPDATE_URL, url)
                 intent.putExtra(EXTRA_IS_FORCE, isForce)
@@ -49,7 +49,6 @@ class DownloadService : Service() {
         }
 
         fun stopService(context: Context, connection: ServiceConnection) {
-//            Log.d(TAG, "stopService")
             context.unbindService(connection)
         }
     }

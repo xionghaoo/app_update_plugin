@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 updateUrl: "https://testin-ee1.oss-cn-hangzhou.aliyuncs.com/5149747_1652729_app_20200511_ca7ea762-fa04-4507-b313-cad920d1fec5.apk",
                 appVersion: "1.0.1",
                 appContent: "Hello",
-                isForce: true
+                isForce: false
             );
           },
         ),
