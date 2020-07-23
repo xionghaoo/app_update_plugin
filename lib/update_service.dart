@@ -53,8 +53,10 @@ class UpdateService {
     _methodChannel.invokeMethod("installApk");
   }
 
-  navigateToAppStore() {
-    _methodChannel.invokeMethod("navigateToAppStore");
+  navigateToAppStore(String appId) {
+    _methodChannel.invokeMethod("navigateToAppStore", {
+      "appId": appId
+    });
   }
 
   _downloadProgressWidget() {

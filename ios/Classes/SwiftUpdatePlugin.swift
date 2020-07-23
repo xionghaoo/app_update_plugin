@@ -18,7 +18,9 @@ public class SwiftUpdatePlugin: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "navigateToAppStore":
-            if let scheme = URL(string: "itms-apps://itunes.apple.com/app/1509974002") {
+            if let arguments = call.arguments as? Dictionary<String, Any?>,
+                let appId = arguments["appId"] as? String,
+                let scheme = URL(string: "itms-apps://itunes.apple.com/app/\(appId)") {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(scheme, options: [:], completionHandler: nil)
                 } else {
